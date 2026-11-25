@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"
+  ><head
+    ><meta charset="utf-8" /><meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    /><title>Skedz – local editor</title>
+    <style>
+      body {
+        font: 18px system-ui;
+        max-width: 720px;
+        margin: 4rem auto;
+        padding: 1rem;
+        line-height: 1.6;
+      }
+      a {
+        display: inline-block;
+        padding: 0.7rem 1rem;
+        margin: 0.3rem;
+        background: #eee;
+        color: #222;
+        border-radius: 0.4rem;
+      }
+      small {
+        display: block;
+      }
+    </style></head
+  >
+  <body>
+    <h1>Edit Skedz locally</h1>
+    <p
+      >Open the editor, select <strong>Work with Local Repository</strong>, and share the project folder where <strong>package.json</strong> is located. No login is required.</p
+    >
+    <p
+      ><a href="/editor/">Content editor</a
+      ><a href="/" target="_blank">Preview website</a
+      ></p
+    >
+    <h2>Workflow</h2>
+    <ol>
+      <li>Save locally with <strong>Save</strong> and check the preview. </li>
+      <li>Exit the editor after saving with <strong>Ctrl+C in the terminal</strong>.</li>
+      <li>Execute <strong>npm run build</strong> to generate finished files without upload.</li>
+      <li>Execute <strong>npm run deploy</strong> to upload the finished files to the live website.</li>
+    </ol>
+    <p>
+      <strong>Note:</strong> 
+      Before running <code>npm run deploy</code>, you have to set up SFTP or FTPS access. 
+      Making a backup of an already existing live website is recommended. 
+      Saving, previewing, and building do not publish anything.</p>
+  </body>
+</html>

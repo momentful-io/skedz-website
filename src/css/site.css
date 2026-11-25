@@ -1,0 +1,60 @@
+/* Styles for content written in Markdown (src/pages/*.md, src/home/*.md). */
+
+/* A paragraph that introduces a list sits close to it. */
+.page-content p:has(+ ul, + ol),
+.section-entry p:has(+ ul, + ol),
+.accordion-body p:has(+ ul, + ol) {
+  margin-bottom: 0.5rem;
+}
+
+/* No extra gap at the bottom of cards and accordion items (including loose lists). */
+.section-entry > div > :last-child,
+.section-entry > div > :last-child > li:last-child > p:last-child,
+.accordion-body > :last-child {
+  margin-bottom: 0;
+}
+
+/* Long URLs must not overflow cards on small screens. */
+.section-entry a,
+.accordion-body a {
+  overflow-wrap: anywhere;
+}
+
+/* Homepage */
+.hero-intro p {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.section-entry h3 {
+  margin-bottom: 1rem;
+}
+
+.section-highlight h3 {
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+.section-highlight p {
+  font-size: calc(1.275rem + 0.3vw);
+}
+
+@media (min-width: 1200px) {
+  .section-highlight p {
+    font-size: 1.5rem;
+  }
+}
+
+/* Imprint, privacy and other content pages */
+.page-content h1 {
+  margin-bottom: 3rem;
+}
+
+.page-content h2 {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.page-content p {
+  margin-bottom: 1.5rem;
+}

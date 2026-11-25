@@ -1,0 +1,63 @@
+    <header class="container px-4 py-2 py-md-5 my-4 text-center pb-2 mb-2">
+      <img class="d-block mx-auto mb-4 rounded-circle" src="assets/logo.png" alt="Skedz logo" width="90" height="90">
+      <h1 class="display-5 fw-bold text-body-emphasis">{{ heading | escape }}</h1>
+      <p class="fs-4">{{ tagline | inlineMarkdown | safe }}</p>
+      <div class="col-lg-8 mx-auto">
+        <div class="hero-intro">{{ content | safe }}</div>
+        {% for button in buttons %}
+        <a href="{{ button.url | escape }}" role="button" class="btn {{ 'btn-primary' if loop.first else 'btn-secondary' }} btn-lg px-4">{{ button.label | escape }}</a>
+        {% endfor %}
+      </div>
+    </header>
+
+    <main>
+      {% for section in collections.homeSections %}
+      {% set id = section.page.fileSlug %}
+      {% set display = section.data.display %}
+      {% set blocks = section.content | headingBlocks %}
+      <section id="{{ id }}" class="container px-4 py-4">
+        <h2 class="pb-2 fs-5 text-muted">{{ section.data.title | escape }}</h2>
+
+        {% if display == 'highlight' %}
+        <div class="section-highlight bg-body-tertiary rounded-3 shadow text-center mt-3 px-4 px-sm-5 py-4 py-sm-5">
+          {{ section.content | safe }}
+          {% if section.data.buttons and section.data.buttons.length %}
+          <div class="d-flex flex-wrap justify-content-center gap-2 gap-md-3 mt-4 mt-sm-5 mb-3">
+            {% for button in section.data.buttons %}
+            <a href="{{ button.url | escape }}" role="button" class="btn {{ 'btn-primary' if loop.first else 'btn-secondary' }}">{{ button.label | escape }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        {% elif display == 'accordion' %}
+        <div class="accordion rounded-3 shadow mt-3" id="{{ id }}-accordion">
+          {% for block in blocks %}
+          <div class="accordion-item">
+            <h3 class="accordion-header" id="{{ id }}-heading-{{ loop.index }}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ id }}-item-{{ loop.index }}"
+                      aria-expanded="false" aria-controls="{{ id }}-item-{{ loop.index }}">{{ block.heading | safe }}</button>
+            </h3>
+            <div id="{{ id }}-item-{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="{{ id }}-heading-{{ loop.index }}"
+                 data-bs-parent="#{{ id }}-accordion">
+              <div class="accordion-body">{{ block.body | safe }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% else %}
+        <div class="row g-4 pt-2 row-cols-1 row-cols-lg-{{ 3 if blocks.length > 3 else blocks.length }}">
+          {% for block in blocks %}
+          <div class="section-entry col">
+            <div class="h-100 bg-body-tertiary rounded-3 p-4 shadow">
+              {% if block.heading %}<h3>{{ block.heading | safe }}</h3>{% endif %}
+              {{ block.body | safe }}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </section>
+      {% endfor %}
+    </main>
