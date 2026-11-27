@@ -28,6 +28,7 @@
     {% if not home %}
     <meta name="robots" content="noindex,nofollow" />
     {% endif %}
+    <meta name="generator" content="Eleventy">
   </head>
   <body>
     {% include 'index.njk' if home else 'page.njk' %}
